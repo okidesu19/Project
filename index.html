@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil IT Network Systems Administrator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        :root {
+            --primary: #3b82f6;
+            --secondary: #1e3a8a;
+            --bg-light: #f5f5f5;
+            --bg-dark: #0f172a;
+            --text-light: #0f172a;
+            --text-dark: #e2e8f0;
+            --accent: #10b981;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            line-height: 1.8;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode nav {
+            background: rgba(15, 23, 42, 0.1);
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode nav.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-menu li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .nav-menu li a {
+            color: var(--text-dark);
+        }
+
+        .nav-menu li a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(1);
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        body.dark-mode .theme-toggle {
+            color: var(--text-dark);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 0 20px;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s forwards;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Section */
+        .section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        body.dark-mode .section {
+            background: #1e293b;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--secondary);
+        }
+
+        .toggle-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .toggle-btn:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .config-content {
+            display: none;
+            margin-top: 1.5rem;
+            animation: slideIn 0.5s ease;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                padding: 1rem;
+            }
+
+            body.dark-mode .nav-menu {
+                background: rgba(15, 23, 42, 0.95);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+                font-size: 1.8rem;
+                cursor: pointer;
+                color: var(--text-light);
+            }
+
+            body.dark-mode .hamburger {
+                color: var(--text-dark);
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">ITNSA</div>
+            <ul class="nav-menu">
+                <li><a href="#profil"><i class="fas fa-user"></i> Profil</a></li>
+                <li><a href="#apache"><i class="fas fa-server"></i> Apache</a></li>
+                <li><a href="#dns"><i class="fas fa-network-wired"></i> DNS</a></li>
+                <li><a href="#ftp"><i class="fas fa-file-upload"></i> FTP</a></li>
+                <li><a href="#samba"><i class="fas fa-folder"></i> Samba</a></li>
+            </ul>
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section id="profil" class="hero">
+            <h1>Profil IT Network Systems Administrator</h1>
+            <p>Nama: Jonatan Sigalingging<br>
+               Pengalaman: Administrator Jaringan dengan keahlian dalam konfigurasi server dan manajemen sistem.<br>
+               Spesialisasi: Web Server (Apache), DNS (Bind9), FTP (ProFTPD), File Sharing (Samba), Mail Server, SSH Server, Load Balance (haproxy) dan konfigurasi Mikrotik<br>
+               Kontak: jonathansigalinggin012@gmail.com | 083135855211</p>
+        </section>
+
+        <section id="apache" class="section">
+            <h2><i class="fas fa-server"></i> Konfigurasi Web Server Apache</h2>
+            <p>Langkah-langkah dasar untuk mengkonfigurasi Apache di Debian.</p>
+            <button class="toggle-btn" data-id="apache-config" aria-label="Tampilkan konfigurasi Apache"><i class="fas fa-code"></i> Tampilkan Konfigurasi</button>
+            <div id="apache-config" class="config-content">
+                <pre>
+# 1. Instalasi Apache
+sudo apt update
+sudo apt install apache2
+
+# 2. Memulai dan mengaktifkan service
+sudo systemctl start apache2
+sudo systemctl enable apache2
+
+# 3. Konfigurasi virtual host (contoh)
+sudo nano /etc/apache2/sites-available/contoh.com.conf
+
+# Isi file virtual host:
+<VirtualHost *:80>
+    ServerName contoh.com
+    ServerAlias www.contoh.com
+    DocumentRoot /var/www/contoh.com
+    ErrorLog ${APACHE_LOG_DIR}/contoh.com-error.log
+    CustomLog ${APACHE_LOG_DIR}/contoh.com-access.log combined
+</VirtualHost>
+
+# 4. Aktifkan virtual host
+sudo a2ensite contoh.com.conf
+sudo systemctl reload apache2
+                </pre>
+                <button class="copy-btn" onclick="copyCode('apache-config')">Salin Kode</button>
+            </div>
+        </section>
+
+        <section id="dns" class="section">
+            <h2><i class="fas fa-network-wired"></i> Konfigurasi DNS Server (Bind9)</h2>
+            <p>Langkah-langkah mengkonfigurasi DNS menggunakan Bind9.</p>
+            <button class="toggle-btn" data-id="dns-config" aria-label="Tampilkan konfigurasi DNS"><i class="fas fa-code"></i> Tampilkan Konfigurasi</button>
+            <div id="dns-config" class="config-content">
+                <pre>
+# 1. Instalasi Bind9
+sudo apt update
+sudo apt install bind9 dnsutils
+
+# 2. Konfigurasi zona
+sudo nano /etc/bind/named.conf.local
+
+# Tambahkan:
+zone "contoh.com" {
+    type master;
+    file "/etc/bind/db.contoh.com";
+};
+
+# 3. Buat file zona
+sudo cp /etc/bind/db.local /etc/bind/db.contoh.com
+sudo nano /etc/bind/db.contoh.com
+
+# Contoh isi:
+$TTL    604800
+@       IN      SOA     ns1.contoh.com. admin.contoh.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+@       IN      NS      ns1.contoh.com.
+@       IN      A       192.168.0.2
+ns1     IN      A       192.168.0.2
+www     IN      A       192.168.0.2
+
+# 4. Restart service
+sudo systemctl restart bind9
+                </pre>
+                <button class="copy-btn" onclick="copyCode('dns-config')">Salin Kode</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Fungsi untuk toggle konten konfigurasi
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+            } else {
+                content.style.display = 'block';
+            }
+        }
+
+        // Tambahkan event listener ke semua tombol toggle
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                toggleContent(id);
+            });
+        });
+
+        // Fungsi untuk menyalin kode
+        function copyCode(id) {
+            const code = document.querySelector(`#${id} pre`).innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.querySelector(`#${id} .copy-btn`);
+                btn.innerText = 'Tersalin!';
+                setTimeout(() => btn.innerText = 'Salin Kode', 2000);
+            });
+        }
+
+        // Dark mode toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        });
+
+        // Hamburger menu
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = hamburger.querySelector('i');
+            icon.className = navMenu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+        });
+    </script>
+</body>
+</html>
